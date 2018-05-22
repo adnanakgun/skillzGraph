@@ -1,0 +1,30 @@
+<div>
+    <svg 
+        [attr.width]="localSettings.width"
+        [style.font-family]="localSettings.fontFamily"
+        #skillzgraph
+    >
+        <text
+            [attr.y]="localSettings.fontSize"
+            [attr.fill]="localSettings.fontColour"
+        >{{localSettings.startYear}}</text>
+
+        <text
+            [attr.x]="rightTxtPos"
+            [attr.y]="localSettings.fontSize"
+            [attr.fill]="localSettings.fontColour"
+            #righttxt
+        >{{localSettings.endYear}}</text>
+
+        <g
+            *ngFor="let skill of localSettings.skillz;index as i;"
+            [attr.transform]="'translate(0, ' + (i + 1) * (localSettings.fontSize + 40) + ')'"
+        >
+            <text
+                [attr.y]="localSettings.fontSize"
+            >{{skill.label}}</text>
+        </g>
+
+    </svg>
+</div>
+<button (click)="save()">Save as png</button>
