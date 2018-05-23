@@ -1,21 +1,20 @@
 import { Skill } from './skill';
 
 export class SkillzGraphSettings {
-    width: string;
-    skillz: Skill[];
-    startYear: number;
-    endYear: number;
-    fontSize: number;
-    fontFamily: string;
-    fontColour: string;
+    width?: string;
+    skillz?: Skill[];
+    startYear?: number;
+    endYear?: number;
+    baseHeight?: number;
+    fontColour?: string;
 
     constructor() {
         this.width = '100%';
         this.skillz = [];
+        this.skillz.push(new Skill);
         this.startYear = 2005;
         this.endYear = 2010;
-        this.fontSize = 11;
-        this.fontFamily = 'Times New Roman';
+        this.baseHeight = 11;
         this.fontColour = 'blue';
     }
 }

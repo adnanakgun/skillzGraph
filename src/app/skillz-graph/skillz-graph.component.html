@@ -1,30 +1,49 @@
 <div>
     <svg 
         [attr.width]="localSettings.width"
+        [attr.height]="compHeight"
         [style.font-family]="localSettings.fontFamily"
         #skillzgraph
     >
         <text
-            [attr.y]="localSettings.fontSize"
+            [attr.y]="localSettings.baseHeight"
             [attr.fill]="localSettings.fontColour"
         >{{localSettings.startYear}}</text>
 
         <text
             [attr.x]="rightTxtPos"
-            [attr.y]="localSettings.fontSize"
+            [attr.y]="localSettings.baseHeight"
             [attr.fill]="localSettings.fontColour"
             #righttxt
         >{{localSettings.endYear}}</text>
 
-        <g
-            *ngFor="let skill of localSettings.skillz;index as i;"
-            [attr.transform]="'translate(0, ' + (i + 1) * (localSettings.fontSize + 40) + ')'"
-        >
-            <text
-                [attr.y]="localSettings.fontSize"
-            >{{skill.label}}</text>
-        </g>
+        <g [attr.transform]="'translate(0, ' + (localSettings.baseHeight + 10) + ')'">
+            <g
+                *ngFor="let skill of localSettings.skillz;index as i;"
+                [attr.transform]="'translate(0, ' + (i * (localSettings.baseHeight + 30)) + ')'"
+            >
+                <text
+                    [attr.y]="localSettings.baseHeight"
+                >{{skill.label}}</text>
 
+                <rect
+                    [attr.stroke]="skill.colour"
+                    [attr.width]="compWidth"
+                    [attr.y]="localSettings.baseHeight + 5"
+                    [attr.height]="barHeight"
+                    fill="transparent"
+                />
+
+                <rect
+                    *ngFor="let year of years;index as j;"
+                    [attr.width]="boxWidth"
+                    [attr.x]="boxWidth * j"
+                    [attr.y]="localSettings.baseHeight + 5"
+                    [attr.height]="barHeight"
+                    [attr.fill]="getBoxColour(year, skill.occurences, skill.colour)"
+                />
+            </g>
+        </g>
     </svg>
 </div>
 <button (click)="save()">Save as png</button>
