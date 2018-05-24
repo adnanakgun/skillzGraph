@@ -1,0 +1,12 @@
+text {
+    font-family: 'leelawadee';
+    font-size: 13px;
+
+    &.skill-label {
+        filter:  url('#skillLabelBg')
+    }
+}
+
+line {
+    opacity: 0.2;
+}

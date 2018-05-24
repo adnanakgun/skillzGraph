@@ -11,19 +11,17 @@ export class SkillzGraphComponent implements OnChanges, OnInit {
 
   @Input() settings: SkillzGraphSettings;
   @ViewChild('skillzgraph') rootEl;
-  @ViewChild('righttxt') rightTxt;
 
   public localSettings: SkillzGraphSettings;
-  public rightTxtPos: number;
   public years: number[];
   public boxWidth: number;
   public compWidth: number;
   public barHeight: number;
-  public compHeight: string;
+  public compHeight: number;
 
   constructor() {
     this.localSettings = new SkillzGraphSettings;
-    this.years = [];
+    this.compHeight = 0;
   }
 
   ngOnInit() {
@@ -46,16 +44,17 @@ export class SkillzGraphComponent implements OnChanges, OnInit {
 
     setTimeout(() => {
       this.compWidth = this.rootEl.nativeElement.clientWidth;
-      this.rightTxtPos = this.compWidth - this.rightTxt.nativeElement.clientWidth || 0;
 
-      for (let i = this.localSettings.startYear; i < this.localSettings.endYear; i++) {
+      this.years = [];
+      for (let i = this.localSettings.startYear; i < this.localSettings.endYear + 1; i++) {
         this.years.push(i);
       }
 
-      this.boxWidth = this.compWidth / (this.localSettings.endYear - this.localSettings.startYear);
+      this.boxWidth = this.compWidth / ((this.localSettings.endYear + 1) - this.localSettings.startYear);
       this.compHeight = (2 * this.localSettings.baseHeight + 10)
-                        + (this.localSettings.skillz.length * (this.localSettings.baseHeight + 30)) + 'px';
-    }, 300);
+                        + (this.localSettings.skillz.length * (this.localSettings.baseHeight + 30));
+
+    }, 0);
   }
 
   public save() {
@@ -65,6 +64,5 @@ export class SkillzGraphComponent implements OnChanges, OnInit {
   public getBoxColour(year, skillOccurences, skillColour) {
     return skillOccurences.indexOf(year) > -1 ? skillColour : 'transparent';
   }
-
 
 }

@@ -1,37 +1,51 @@
 <div>
     <svg 
         [attr.width]="localSettings.width"
-        [attr.height]="compHeight"
+        [attr.height]="compHeight + 'px'"
         [style.font-family]="localSettings.fontFamily"
         #skillzgraph
     >
+        <line 
+            [attr.x1]="boxWidth * k" 
+            [attr.y1]="localSettings.baseHeight + 5"
+            [attr.x2]="boxWidth * k"
+            [attr.y2]="compHeight - localSettings.baseHeight"
+            [attr.stroke]="k > 0 ? '#000000' : ''"
+            *ngFor="let year of years;index as k;"
+        ></line>
         <text
             [attr.y]="localSettings.baseHeight"
             [attr.fill]="localSettings.fontColour"
-        >{{localSettings.startYear}}</text>
-
-        <text
-            [attr.x]="rightTxtPos"
-            [attr.y]="localSettings.baseHeight"
-            [attr.fill]="localSettings.fontColour"
-            #righttxt
-        >{{localSettings.endYear}}</text>
+            style="font-weight: bold"
+        >
+            <tspan>{{localSettings.startYear}}</tspan>
+            <tspan x="100%" text-anchor="end">{{localSettings.endYear}}</tspan>
+        </text>
 
         <g [attr.transform]="'translate(0, ' + (localSettings.baseHeight + 10) + ')'">
             <g
                 *ngFor="let skill of localSettings.skillz;index as i;"
                 [attr.transform]="'translate(0, ' + (i * (localSettings.baseHeight + 30)) + ')'"
             >
+                
                 <text
                     [attr.y]="localSettings.baseHeight"
-                >{{skill.label}}</text>
-
+                    [attr.fill]="skill.labelColour"
+                    class="skill-label"
+                    x="5"
+                ><tspan>{{skill.label}}</tspan></text>
+                <defs>
+                    <filter id="skillLabelBg">
+                        <feFlood flood-color="#ffffff"/>
+                        <feComposite in="SourceGraphic"/>
+                    </filter>
+                </defs>
                 <rect
                     [attr.stroke]="skill.colour"
                     [attr.width]="compWidth"
                     [attr.y]="localSettings.baseHeight + 5"
                     [attr.height]="barHeight"
-                    fill="transparent"
+                    fill="#ffffff"
                 />
 
                 <rect
