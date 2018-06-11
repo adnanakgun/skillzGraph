@@ -1,0 +1,37 @@
+.settings-btn {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+.modal-header {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.modal-title {
+    text-transform: uppercase;
+}
+
+.new-skill {
+    vertical-align: top;
+
+    &__input {
+        display: inline-block;
+        width: 89%;
+        margin-right: 10px;
+    }
+
+    &__button {
+        vertical-align: top;
+    }
+}
+
+
+.active-years {
+
+    &__actual {
+        display: inline-block;
+        width: 48%;
+    }
+}

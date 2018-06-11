@@ -1,1 +1,40 @@
-<input type="file" (change)="execute($event)"/>
+<button type="button" class="btn btn-info settings-btn" 
+        (click)="openModal(settingsTemplate)">Open settings</button>
+
+<ng-template #settingsTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Settings</h4>
+        <button type="button" class="close pull-right" 
+                aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="fontFile">Font file:</label><input class="form-control" id="fontFile" type="file" (change)="execute($event)"/>
+        </div>
+        <div class="form-group">
+            <label for="width">Width</label><input class="form-control" id="width" type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="baseHeight">Base Height</label><input class="form-control" id="baseHeight" type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="width">Font colour</label><input class="form-control" id="fontColour" type="text"/>
+        </div>
+        <div class="form-group">
+            <label>Active Years</label>
+            <div class="active-years">
+                <input id="startYear" class="form-control active-years__actual" type="text"/>
+                -
+                <input id="endYear" class="form-control active-years__actual" type="text"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Skillz</label>
+            <div class="new-skill">
+                <input id="newSkill" class="form-control new-skill__input" type="text"/><button class="btn new-skill__button" (click)="addSkill()">+</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
